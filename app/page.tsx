@@ -30,7 +30,6 @@ export default function Home() {
       wheelMultiplier: 0.8,
       touchMultiplier: 1.5,
       infinite: false,
-      normalizeWheel: true,
     })
 
     // Connect Lenis with GSAP ScrollTrigger
