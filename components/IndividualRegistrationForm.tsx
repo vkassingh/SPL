@@ -16,6 +16,10 @@ interface IndividualFormData {
   position: string
   experience: string
   email: string
+  aadhaarDoc?: string
+  schoolIdDoc?: string
+  dobProofDoc?: string
+  photoDoc?: string
 }
 
 const districts = [
@@ -32,28 +36,36 @@ const districts = [
 ]
 
 export default function IndividualRegistrationForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<IndividualFormData>()
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<IndividualFormData>()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [documents, setDocuments] = useState({
+    aadhaarDoc: '',
+    schoolIdDoc: '',
+    dobProofDoc: '',
+    photoDoc: ''
+  })
 
   const onSubmit = async (data: IndividualFormData) => {
     setIsSubmitting(true)
     try {
+      const formData = { ...data, ...documents }
+      
       const response = await fetch('/api/register/individual', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData)
       })
       
       if (response.ok) {
         const result = await response.json()
-        // Redirect to payment page with proper parameters
         const params = new URLSearchParams({
           registrationId: result.registrationId,
           amount: result.amount.toString(),
           email: data.email,
           phone: data.phone,
           name: data.name,
-          type: 'individual'
+          type: 'individual',
+          playerId: result.playerId
         })
         window.location.href = `/payment?${params.toString()}`
       }
@@ -254,10 +266,30 @@ export default function IndividualRegistrationForm() {
       <div className="card">
         <h2 className="text-xl font-semibold mb-6 text-gold-600">Document Upload (Mandatory)</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <DocumentUpload label="Aadhaar Card" required />
-          <DocumentUpload label="School/College ID" required />
-          <DocumentUpload label="Date of Birth Proof" required />
-          <DocumentUpload label="Passport Size Photograph" required />
+          <DocumentUpload 
+            label="Aadhaar Card" 
+            name="aadhaarDoc"
+            required 
+            onChange={(url) => setDocuments(prev => ({ ...prev, aadhaarDoc: url || '' }))}
+          />
+          <DocumentUpload 
+            label="School/College ID" 
+            name="schoolIdDoc"
+            required 
+            onChange={(url) => setDocuments(prev => ({ ...prev, schoolIdDoc: url || '' }))}
+          />
+          <DocumentUpload 
+            label="Date of Birth Proof" 
+            name="dobProofDoc"
+            required 
+            onChange={(url) => setDocuments(prev => ({ ...prev, dobProofDoc: url || '' }))}
+          />
+          <DocumentUpload 
+            label="Passport Size Photograph" 
+            name="photoDoc"
+            required 
+            onChange={(url) => setDocuments(prev => ({ ...prev, photoDoc: url || '' }))}
+          />
         </div>
       </div>
 

@@ -8,16 +8,25 @@ export async function POST(request: NextRequest) {
     
     const registrationId = `SPL${nanoid(8).toUpperCase()}`
     
-    const user = await prisma.user.create({
-      data: {
-        email: data.email || `player_${nanoid(8)}@spl.com`,
-        password: 'temp',
-        role: 'PUBLIC',
-        name: data.name,
-        phone: data.phone,
-        district: data.district
-      }
+    const existingUser = await prisma.user.findUnique({
+      where: { email: data.email }
     })
+
+    let user
+    if (existingUser) {
+      user = existingUser
+    } else {
+      user = await prisma.user.create({
+        data: {
+          email: data.email || `player_${nanoid(8)}@spl.com`,
+          password: 'temp',
+          role: 'PUBLIC',
+          name: data.name,
+          phone: data.phone,
+          district: data.district
+        }
+      })
+    }
 
     const player = await prisma.player.create({
       data: {
@@ -32,6 +41,10 @@ export async function POST(request: NextRequest) {
         role: data.role,
         position: data.position,
         experience: data.experience,
+        aadhaarDoc: data.aadhaarDoc,
+        schoolIdDoc: data.schoolIdDoc,
+        dobProofDoc: data.dobProofDoc,
+        photoDoc: data.photoDoc,
         isIndividual: true,
         teamAssigned: false,
         createdById: user.id

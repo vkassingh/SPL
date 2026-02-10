@@ -61,8 +61,7 @@ export default function AdminTeams() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-primary-600">Team Management</h1>
           <p className="text-gray-600">Manage team registrations and approvals</p>
@@ -149,6 +148,5 @@ export default function AdminTeams() {
           </div>
         </div>
       </div>
-    </div>
   )
 }
