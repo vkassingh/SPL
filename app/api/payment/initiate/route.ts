@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
       hash,
     };
 
-    const isProduction = process.env.NODE_ENV === 'production';
+    const isProduction = false; // Set to true when URLs are whitelisted
     const paymentUrl = isProduction 
       ? 'https://pay.easebuzz.in/payment/initiateLink'
       : 'https://testpay.easebuzz.in/payment/initiateLink';

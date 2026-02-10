@@ -35,9 +35,6 @@ export const createEasebuzzPayment = (
 ): EasebuzzPaymentData => {
   const txnid = `SPL_${registrationId}_${Date.now()}`;
   
-  const isProduction = process.env.NODE_ENV === 'production';
-  const baseUrl = isProduction ? process.env.NEXTAUTH_URL : 'http://localhost:3000';
-  
   const paymentData: EasebuzzPaymentData = {
     txnid,
     amount: amount.toString(),
@@ -45,8 +42,8 @@ export const createEasebuzzPayment = (
     firstname: name || 'SPL User',
     email: email || 'test@spl.com',
     phone: phone || '9999999999',
-    surl: `${baseUrl}/payment/success`,
-    furl: `${baseUrl}/payment/failed`,
+    surl: 'https://testpay.easebuzz.in/merchant/api/v1/Response/',
+    furl: 'https://testpay.easebuzz.in/merchant/api/v1/Response/',
     udf1: registrationId,
     udf2: registrationType,
   };

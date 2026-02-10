@@ -13,6 +13,8 @@ export default function PaymentPage() {
   const phone = searchParams.get('phone')
   const name = searchParams.get('name')
   const type = searchParams.get('type')
+  const teamId = searchParams.get('teamId')
+  const playerId = searchParams.get('playerId')
 
   const handlePayment = async () => {
     setLoading(true)
@@ -27,7 +29,9 @@ export default function PaymentPage() {
           email,
           phone,
           name,
-          registrationType: type
+          registrationType: type,
+          teamId,
+          playerId
         })
       })
       
