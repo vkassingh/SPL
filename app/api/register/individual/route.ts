@@ -1,20 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { sendRegistrationEmail } from '@/lib/email'
 import { nanoid } from 'nanoid'
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
     
-    // Generate registration ID
     const registrationId = `SPL${nanoid(8).toUpperCase()}`
     
-    // Create user for individual player
     const user = await prisma.user.create({
       data: {
-        email: `player_${nanoid(8)}@spl.com`,
-        password: 'temp', // Will be updated later
+        email: data.email || `player_${nanoid(8)}@spl.com`,
+        password: 'temp',
         role: 'PUBLIC',
         name: data.name,
         phone: data.phone,
@@ -22,7 +19,6 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Create individual player
     const player = await prisma.player.create({
       data: {
         name: data.name,
@@ -30,7 +26,7 @@ export async function POST(request: NextRequest) {
         dateOfBirth: new Date(data.dateOfBirth),
         phone: data.phone,
         alternatePhone: data.alternatePhone,
-        aadhaarNo: nanoid(12), // Temporary, will be updated with actual Aadhaar
+        aadhaarNo: data.aadhaarNo || nanoid(12),
         schoolCollege: data.schoolCollege,
         district: data.district,
         role: data.role,
@@ -41,18 +37,6 @@ export async function POST(request: NextRequest) {
         createdById: user.id
       }
     })
-
-    // Send registration confirmation email
-    try {
-      await sendRegistrationEmail(
-        data.email,
-        registrationId,
-        undefined,
-        data.name
-      )
-    } catch (emailError) {
-      console.error('Email sending failed:', emailError)
-    }
 
     return NextResponse.json({ 
       success: true, 
@@ -68,7 +52,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Individual registration error:', error)
     return NextResponse.json(
-      { error: 'Registration failed' },
+      { error: 'Registration failed', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
