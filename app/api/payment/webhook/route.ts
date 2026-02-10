@@ -1,9 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import crypto from 'crypto'
 import { prisma } from '@/lib/prisma'
+
+const verifyEasebuzzSignature = (data: any): boolean => {
+  const salt = process.env.EASEBUZZ_SALT!;
+  const hashString = `${salt}|${data.status}|||||||||||${data.udf2 || ''}|${data.udf1 || ''}|${data.email}|${data.firstname}|${data.productinfo}|${data.amount}|${data.txnid}|${process.env.EASEBUZZ_KEY}`;
+  const hash = crypto.createHash('sha512').update(hashString).digest('hex');
+  return hash === data.hash;
+};
 
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json()
+    const data = await req.json();
+
+    if (!verifyEasebuzzSignature(data)) {
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
+    }
 
     if (data.status === 'success') {
       await prisma.payment.updateMany({

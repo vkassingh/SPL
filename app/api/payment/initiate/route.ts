@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createEasebuzzPayment, generateEasebuzzHash } from '@/lib/easebuzz';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
-    const { registrationId, amount, email, phone, name, registrationType } = await request.json();
+    const { registrationId, amount, email, phone, name, registrationType, teamId, playerId } = await request.json();
 
     const paymentData = createEasebuzzPayment(
       registrationId,
@@ -13,6 +14,15 @@ export async function POST(request: NextRequest) {
       name,
       registrationType
     );
+
+    await prisma.payment.create({
+      data: {
+        amount,
+        transactionId: paymentData.txnid,
+        status: 'PENDING',
+        teamId: teamId || null
+      }
+    });
 
     const hash = generateEasebuzzHash(paymentData);
 
@@ -34,10 +44,15 @@ export async function POST(request: NextRequest) {
       hash,
     };
 
+    const isProduction = process.env.NODE_ENV === 'production';
+    const paymentUrl = isProduction 
+      ? 'https://pay.easebuzz.in/payment/initiateLink'
+      : 'https://testpay.easebuzz.in/payment/initiateLink';
+
     return NextResponse.json({
       success: true,
       paymentData: easebuzzData,
-      paymentUrl: 'https://testpay.easebuzz.in/payment/initiateLink'
+      paymentUrl
     });
   } catch (error) {
     console.error('Payment initiation error:', error);
