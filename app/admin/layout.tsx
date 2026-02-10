@@ -1,15 +1,44 @@
 'use client'
 
 import { useRouter, usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { LogOut, LayoutDashboard, Users, UserCheck } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken')
+    if (!token && pathname !== '/admin/login') {
+      router.push('/admin/login')
+    } else {
+      setIsAuthenticated(true)
+    }
+    setLoading(false)
+  }, [pathname, router])
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken')
     router.push('/admin/login')
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated && pathname !== '/admin/login') {
+    return null
+  }
+
+  if (pathname === '/admin/login') {
+    return <>{children}</>
   }
 
   const navItems = [
