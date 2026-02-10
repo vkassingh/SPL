@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
         where: { transactionId: data.txnid },
         data: {
           status: 'SUCCESS',
-          paymentId: data.easepayid
+          razorpayId: data.easepayid
         }
       })
     } else if (data.status === 'failure') {
