@@ -19,7 +19,6 @@ export default function PaymentPage() {
   const handlePayment = async () => {
     setLoading(true)
     try {
-      // Initiate Easebuzz payment
       const response = await fetch('/api/payment/initiate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,21 +37,7 @@ export default function PaymentPage() {
       const data = await response.json()
       
       if (data.success) {
-        // Create form and submit to Easebuzz
-        const form = document.createElement('form')
-        form.method = 'POST'
-        form.action = data.paymentUrl
-        
-        Object.keys(data.paymentData).forEach(key => {
-          const input = document.createElement('input')
-          input.type = 'hidden'
-          input.name = key
-          input.value = data.paymentData[key]
-          form.appendChild(input)
-        })
-        
-        document.body.appendChild(form)
-        form.submit()
+        window.location.href = data.paymentUrl
       }
     } catch (error) {
       console.error('Payment failed:', error)

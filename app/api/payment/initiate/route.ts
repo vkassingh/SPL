@@ -45,15 +45,38 @@ export async function POST(request: NextRequest) {
     };
 
     const isProduction = true;
-    const paymentUrl = isProduction 
+    const apiUrl = isProduction 
       ? 'https://pay.easebuzz.in/payment/initiateLink'
       : 'https://testpay.easebuzz.in/payment/initiateLink';
 
-    return NextResponse.json({
-      success: true,
-      paymentData: easebuzzData,
-      paymentUrl
+    // Get access key from Easebuzz
+    const formBody = Object.keys(easebuzzData)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(easebuzzData[key as keyof typeof easebuzzData] || ''))
+      .join('&');
+
+    const apiResponse = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: formBody
     });
+
+    const result = await apiResponse.json();
+
+    if (result.status === 1) {
+      const paymentUrl = isProduction
+        ? `https://pay.easebuzz.in/pay/${result.data}`
+        : `https://testpay.easebuzz.in/pay/${result.data}`;
+
+      return NextResponse.json({
+        success: true,
+        paymentUrl
+      });
+    }
+
+    throw new Error('Failed to get access key');
   } catch (error) {
     console.error('Payment initiation error:', error);
     return NextResponse.json(
