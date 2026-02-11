@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, teamId, playerId } = await request.json()
+    const data = await request.json()
+    const { txnid, status, amount, firstname, email, phone, productinfo, hash, udf1, udf2 } = data
 
-    // Mock payment verification (in production, verify signature with Razorpay)
-    const isValid = true
+    // Verify Easebuzz hash
+    const salt = process.env.EASEBUZZ_SALT!
+    const hashString = `${salt}|${status}|||||||||||${udf2}|${udf1}|${email}|${firstname}|${productinfo}|${amount}|${txnid}|${process.env.EASEBUZZ_KEY}`
+    const generatedHash = crypto.createHash('sha512').update(hashString).digest('hex')
 
-    if (isValid) {
-      if (teamId) {
-        await prisma.payment.updateMany({
-          where: { teamId },
-          data: { 
-            status: 'SUCCESS',
-            paymentId: razorpay_payment_id,
-            transactionId: razorpay_order_id
-          }
-        })
-      }
+    if (generatedHash === hash && status === 'success') {
+      await prisma.payment.updateMany({
+        where: { transactionId: txnid },
+        data: { 
+          status: 'SUCCESS',
+          paymentId: txnid
+        }
+      })
 
       return NextResponse.json({ success: true })
     }

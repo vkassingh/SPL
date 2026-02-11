@@ -1,0 +1,22 @@
+# Database
+DATABASE_URL="mongodb+srv://webdevvikas:586947@spl.xtmv79d.mongodb.net/spl?retryWrites=true&w=majority&ssl=true"
+
+
+DEFAULT_GMAIL_USER=hulk.bulk.mail@gmail.com
+DEFAULT_GMAIL_PASS=lxri kqau okkc knjh
+
+# NextAuth
+NEXTAUTH_URL=https://spl-seven.vercel.app/
+NEXTAUTH_SECRET="your-secret-key-here"
+
+EASEBUZZ_KEY=UUFS72X2L4
+EASEBUZZ_SALT=JSJNP1ZOEC
+
+# Email
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="587"
+SMTP_USER="hulk.bulk.mail@gmail.com"
+SMTP_PASS="lxri kqau okkc knjh"
+
+# SMS (Optional)
+SMS_API_KEY="your-sms-api-key"

@@ -42,8 +42,8 @@ export const createEasebuzzPayment = (
     firstname: name || 'SPL User',
     email: email || 'test@spl.com',
     phone: phone || '9999999999',
-    surl: 'https://testpay.easebuzz.in/merchant/api/v1/Response/',
-    furl: 'https://testpay.easebuzz.in/merchant/api/v1/Response/',
+    surl: `${process.env.NEXTAUTH_URL}/payment/success`,
+    furl: `${process.env.NEXTAUTH_URL}/payment/failed`,
     udf1: registrationId,
     udf2: registrationType,
   };
