@@ -53,7 +53,7 @@ export default function PaymentPage() {
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-blue-600 mb-4">
+              <h1 className="text-3xl font-bold text-primary-600 mb-4">
                 Complete Payment
               </h1>
               <p className="text-gray-600">
@@ -82,10 +82,10 @@ export default function PaymentPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 p-6 rounded-lg">
+              <div className="bg-primary-50 p-6 rounded-lg">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total Amount:</span>
-                  <span className="text-2xl font-bold text-blue-600">
+                  <span className="text-2xl font-bold text-primary-600">
                     ₹{parseInt(amount || '0').toLocaleString()}
                   </span>
                 </div>
@@ -94,7 +94,7 @@ export default function PaymentPage() {
               <button
                 onClick={handlePayment}
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-4 text-lg rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                className="w-full bg-primary-600 text-white py-4 text-lg rounded-lg hover:bg-primary-700 disabled:opacity-50"
               >
                 {loading ? 'Processing...' : 'Pay Now'}
               </button>

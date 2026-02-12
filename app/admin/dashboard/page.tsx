@@ -62,12 +62,12 @@ export default function AdminDashboard() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+        <div className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl shadow-lg p-6 text-white">
           <div className="flex items-center justify-between mb-4">
             <Trophy className="h-10 w-10 opacity-80" />
             <span className="text-3xl font-bold">{stats?.totalTeams || 0}</span>
           </div>
-          <p className="text-blue-100 text-sm font-medium">Total Teams</p>
+          <p className="text-primary-100 text-sm font-medium">Total Teams</p>
         </div>
 
         <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg p-6 text-white">
@@ -140,10 +140,10 @@ export default function AdminDashboard() {
             className="card hover:shadow-xl transition-all hover:scale-105 text-left group"
           >
             <div className="flex items-center justify-between mb-3">
-              <Trophy className="h-8 w-8 text-blue-500 group-hover:text-blue-600" />
-              <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">{stats?.totalTeams || 0}</span>
+              <Trophy className="h-8 w-8 text-primary-500 group-hover:text-primary-600" />
+              <span className="text-xs bg-primary-100 text-primary-600 px-2 py-1 rounded-full">{stats?.totalTeams || 0}</span>
             </div>
-            <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-600">Manage Teams</h3>
+            <h3 className="text-lg font-semibold mb-2 group-hover:text-primary-600">Manage Teams</h3>
             <p className="text-gray-600 text-sm">Approve, reject, and manage team registrations</p>
           </button>
 

@@ -145,12 +145,12 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section ref={heroRef} className="relative bg-white overflow-hidden pt-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-primary-100"></div>
         
         <div className="relative container mx-auto px-4 py-24">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div 
-              className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-8"
+              className="inline-flex items-center bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -173,7 +173,7 @@ export default function Home() {
                 Saroj Premier League
               </motion.span>
               <motion.span 
-                className="block text-blue-600"
+                className="block text-primary-600"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
@@ -197,7 +197,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <Link href="/register" className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+              <Link href="/register" className="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg">
                 Register Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
@@ -217,7 +217,7 @@ export default function Home() {
             <div className="grid md:grid-cols-4 gap-8">
               <Reveal delay={0.1}>
                 <div className="stat-item text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div className="text-4xl font-bold text-primary-600 mb-2">
                     <AnimatedCounter value="11L" />
                   </div>
                   <div className="text-gray-600">Prize Money</div>
@@ -225,7 +225,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="stat-item text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div className="text-4xl font-bold text-primary-600 mb-2">
                     <AnimatedCounter value="50%" />
                   </div>
                   <div className="text-gray-600">Scholarship</div>
@@ -233,7 +233,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.3}>
                 <div className="stat-item text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div className="text-4xl font-bold text-primary-600 mb-2">
                     <AnimatedCounter value="30" />
                   </div>
                   <div className="text-gray-600">Days Tournament</div>
@@ -241,7 +241,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.4}>
                 <div className="stat-item text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div className="text-4xl font-bold text-primary-600 mb-2">
                     <AnimatedCounter value="1000+" />
                   </div>
                   <div className="text-gray-600">Participants</div>
@@ -266,8 +266,8 @@ export default function Home() {
             <Reveal direction="left" delay={0.2}>
               <ParallaxCard index={0} className="reg-card bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-shadow">
                 <div className="flex items-center mb-6">
-                  <div className="bg-blue-100 p-3 rounded-lg mr-4">
-                    <Users className="w-6 h-6 text-blue-600" />
+                  <div className="bg-primary-100 p-3 rounded-lg mr-4">
+                    <Users className="w-6 h-6 text-primary-600" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900">Team Registration</h3>
@@ -293,7 +293,7 @@ export default function Home() {
                     <span className="text-gray-600">Registration Fee</span>
                     <span className="text-3xl font-bold text-gray-900">₹11,000</span>
                   </div>
-                  <Link href="/register?type=team" className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                  <Link href="/register?type=team" className="block w-full bg-primary-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
                     Register Team
                   </Link>
                 </div>
@@ -354,8 +354,8 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               <Reveal delay={0.1}>
                 <div className="feature-item text-center">
-                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Trophy className="w-8 h-8 text-blue-600" />
+                  <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Trophy className="w-8 h-8 text-primary-600" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Professional Standards</h3>
                   <p className="text-gray-600">International-level tournament organization with professional umpires and facilities.</p>
@@ -386,18 +386,18 @@ export default function Home() {
 
       {/* CTA Section */}
       <ScrollParallax speed={0.6}>
-        <section ref={ctaRef} className="py-20 bg-blue-600">
+        <section ref={ctaRef} className="py-20 bg-primary-600">
           <div className="container mx-auto px-4 text-center">
             <div className="cta-content">
               <h2 className="text-4xl font-bold text-white mb-6">Ready to Begin Your Journey?</h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
                 Join hundreds of talented cricketers in Uttar Pradesh's most prestigious tournament.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/register" className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
+                <Link href="/register" className="bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
                   Start Registration
                 </Link>
-                <Link href="/tournament-format" className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                <Link href="/tournament-format" className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors">
                   View Tournament Details
                 </Link>
               </div>
