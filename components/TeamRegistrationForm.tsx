@@ -74,8 +74,8 @@ export default function TeamRegistrationForm() {
       
       if (response.ok) {
         const result = await response.json()
-        // Redirect to payment page
-        window.location.href = `/payment?teamId=${result.teamId}`
+        alert('Team registered successfully!')
+        window.location.href = '/'
       }
     } catch (error) {
       console.error('Registration failed:', error)
@@ -327,15 +327,12 @@ export default function TeamRegistrationForm() {
       {/* Submit */}
       <div className="card">
         <div className="text-center">
-          <p className="text-gray-600 mb-4">
-            Registration Fee: <span className="font-semibold text-primary-600">₹11,000</span>
-          </p>
           <button
             type="submit"
             disabled={isSubmitting}
             className="btn-primary disabled:opacity-50"
           >
-            {isSubmitting ? 'Processing...' : 'Proceed to Payment'}
+            {isSubmitting ? 'Processing...' : 'Register Team'}
           </button>
         </div>
       </div>
