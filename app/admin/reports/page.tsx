@@ -39,7 +39,7 @@ export default function AdminReports() {
       title: 'Teams Report',
       description: 'Export all team registrations with details',
       icon: FileText,
-      color: 'blue'
+      color: 'primary'
     },
     {
       id: 'players',
