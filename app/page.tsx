@@ -150,6 +150,15 @@ export default function Home() {
         <div className="relative container mx-auto px-4 py-24">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div 
+              className="mb-8 flex justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <img src="/Hero.png" alt="SPL Logo" className="w-64 h-auto object-contain" />
+            </motion.div>
+            
+            <motion.div 
               className="inline-flex items-center bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
