@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-7xl px-4">
-      <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-6 py-3 shadow-xl">
+      <div className="bg-white/20 backdrop-blur-md border border-white/30 px-6 py-3 shadow-xl">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
